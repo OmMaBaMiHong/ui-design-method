@@ -1,0 +1,46 @@
+{
+  "$schema": "ui-design-method/params/v1",
+  "surface": "mini-program",
+  "use": "微信等小程序的起始配方。继承 params-h5 的拇指区、触控、成对处理与检查项，这里只写小程序特有的差异。取值顺序：用户确认值 > 项目已有 token/规范 > 本包默认值。",
+  "inherits": "params-h5.json",
+  "unit": {
+    "rpx": "750rpx = 屏幕宽度；设计稿按 750 宽出，1px（在 375 宽机型）= 2rpx",
+    "rule": "字号、边框用 px 保证清晰度，布局尺寸用 rpx 随屏缩放；表里同时写 px 与 rpx"
+  },
+  "viewport": { "design": "750×1624 rpx（对应 375×812）", "check": ["720 窄机", "828 大屏机"] },
+  "navigation": {
+    "systemNavBar": 44,
+    "capsule": { "height": 32, "right": 7, "top": "状态栏下 4", "rule": "自定义导航栏时标题区与右侧胶囊不重叠，按钮高度与胶囊对齐" },
+    "customNav": "取 wx.getMenuButtonBoundingClientRect() 算出导航栏高度，不写死"
+  },
+  "tabBar": { "height": "50 + 安全区", "items": "2–5 个，图标 81×81rpx 内绘制，文字 10–12px" },
+  "typeScale": {
+    "title": { "px": 20, "rpx": 40 },
+    "body": { "px": 16, "rpx": 32, "lineHeight": "1.6" },
+    "secondary": { "px": 14, "rpx": 28 },
+    "caption": { "px": 12, "rpx": 24 },
+    "minimum": 12
+  },
+  "spacing": { "pageMargin": "32rpx", "cardPadding": "32rpx", "scale": ["8rpx", "16rpx", "24rpx", "32rpx", "48rpx"] },
+  "radius": { "control": "20rpx", "card": "24rpx", "sheet": "32rpx" },
+  "components": {
+    "prefer": "平台原生组件语义优先：button、navigator、scroll-view、swiper、picker、input；外观按产品 token 覆盖",
+    "scroll": "长列表用 scroll-view + 虚拟化或分页；页面级滚动与内部 scroll-view 二选一",
+    "image": "image 组件设 mode=aspectFill/widthFix 并给宽高占位；外链域名加入 downloadFile 白名单"
+  },
+  "platformLimits": {
+    "package": "主包 2MB、总包 20MB 量级，图标用 SVG/iconfont 或 CDN",
+    "subpackages": "低频页面分包，首屏页面在主包",
+    "network": "请求域名需在后台配置；设计时为无网与超时准备状态"
+  },
+  "sharing": { "card": "分享标题 ≤ 20 字，封面 5:4，首屏可见的分享入口放右上或底部操作区" },
+  "transitions": { "pagePush": "系统默认横向推入，保持一致", "custom": "页内动效用 CSS，避免与系统转场叠加" },
+  "checks": [
+    "自定义导航与胶囊不重叠",
+    "TabBar 与安全区",
+    "rpx 布局在 720/828 宽下无溢出",
+    "图片占位与域名白名单",
+    "无网/超时状态",
+    "分包首屏可达"
+  ]
+}
